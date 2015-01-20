@@ -1,0 +1,73 @@
+\documentclass[
+    12pt,
+    a4paper,
+    oneside
+]{scrartcl}
+
+%-----------------------------------------------------------------------------
+% Allgemeine Dokumenten-Informationen
+  \newcommand{\Author}{{Author}}
+  \newcommand{\Title}{{Title}}
+
+%-----------------------------------------------------------------------------
+% Allgemeine Pakete
+  \usepackage{amsmath}               % Mathematik (Paketreihenfolge!)
+  \usepackage[cm-default]{fontspec}  % Schriften
+  \usepackage{polyglossia}           % Silbentrennung
+    \setdefaultlanguage{german}      % Deutsche Rechtschreibung
+  \usepackage{xunicode}              % Unicode-Unterstützung
+  \usepackage{xltxtra}               % XeLaTeX
+  \usepackage{amsfonts,              % Mathe Schriften
+              amssymb,               % +     Symbole (ℝ, …)
+              amsthm,                % +     Theoreme
+              unicode-math}          % +     direkte Unicode Eingabe
+  \usepackage[
+    colorlinks=false,
+    pdfborder={0 0 0},
+    pdfauthor={\Author},
+    pdftitle={\Title},
+    unicode,
+    pdfdisplaydoctitle,
+    breaklinks=true
+  ]{hyperref}                        % Hyperlinks, PDF-Infos
+  \usepackage[
+    paper=a4paper,
+    left=2.54cm,
+    right=2.54cm,
+    top=2.54cm,
+    bottom=2.54cm
+  ]{geometry}                        % Seitenformat mit Seitenrändern
+  %\usepackage{graphicx}              % Grafiken einbinden
+  %\usepackage{subfig}                % Unter-Figures
+  %\usepackage{tikz}                  % Grafiken zeichnen
+%-----------------------------------------------------------------------------
+% Layoutoptionen
+% OTF/TTF-Fonts verwenden
+%\setromanfont[Mapping=tex-text]{Adobe Garamond Pro}
+%\setsansfont[Mapping=tex-text]{Myriad Pro Light}
+%\setmonofont[Mapping=tex-text]{Courier New}
+
+% Überschriften mit Serifen, so wie immer
+\setkomafont{disposition}{\normalcolor\bfseries}
+
+% Alleinstehende Zeilen unterbinden
+\clubpenalty = 10000
+\widowpenalty = 10000 
+\displaywidowpenalty = 10000
+
+%-----------------------------------------------------------------------------
+% Dokumentenanfang
+\begin{document}
+
+%-----------------------------------------------------------------------------
+% Titelinformationen (erst nach \begin{document}, für gute Silbentrennung
+\author{\Author}
+\title{\Title}
+\date{\today}
+
+%-----------------------------------------------------------------------------
+% Dokumenteninhalt
+%-----------------------------------------------------------------------------
+
+
+\end{document}
