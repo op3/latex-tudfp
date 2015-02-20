@@ -1,3 +1,7 @@
+% Warnmeldungen bei veralteten Befehlen/Paketen
+\RequirePackage[l2tabu, orthodox]{nag}
+
+% Dokumentenklasse mit Optionen
 \documentclass[
     12pt,
     a4paper,
@@ -5,41 +9,67 @@
 ]{scrartcl}
 
 %-----------------------------------------------------------------------------
-% Allgemeine Dokumenten-Informationen
-  \newcommand{\Author}{{Author}}
-  \newcommand{\Title}{{Title}}
+% Allgemeine Pakete
+  \usepackage{iftex}
+  \ifPDFTeX                     % pdfTeX-spezifische Pakete
+    \usepackage[ngerman]{babel}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage{lmodern}
+  \else
+    \usepackage{polyglossia}
+    \setdefaultlanguage{german}
+
+    \ifXeTeX                    % XeTeX-spezifische Pakete
+      \usepackage{xltxtra}
+    \else                       % LuaTeX-spezifische Pakete
+      \usepackage{luatextra}
+    \fi
+    \defaultfontfeatures{Ligatures=TeX}
+  \fi
+  \usepackage{microtype}        % Bessere Typographie
+  \usepackage{selnolig}         % Bessere Ligaturen
 
 %-----------------------------------------------------------------------------
-% Allgemeine Pakete
-  \usepackage{amsmath}               % Mathematik (Paketreihenfolge!)
-  \usepackage[cm-default]{fontspec}  % Schriften
-  \usepackage{polyglossia}           % Silbentrennung
-    \setdefaultlanguage{german}      % Deutsche Rechtschreibung
-  \usepackage{xunicode}              % Unicode-Unterstützung
-  \usepackage{xltxtra}               % XeLaTeX
-  \usepackage{amsfonts,              % Mathe Schriften
-              amssymb,               % +     Symbole (ℝ, …)
-              amsthm}                % +     Theoreme
-  \usepackage[
+% Weitere (dokumentenspezifische Pakete
+  \usepackage{mathtools}        % Mathematik
+  \usepackage{amssymb}          % + Symbole
+% \usepackage{amsthm}           % + Theoreme
+  \usepackage{siunitx}          % Zahlen mit Einheiten
+
+% \usepackage{graphicx}          % Grafiken einbinden
+% \usepackage{tikz}              % Zeichnungen erstellen
+
+% \usepackage[backend=biber]{biblatex} % Bibliograhie
+
+% \usepackage[xindy]{glossaries} % Glossar
+% \usepackage[xindy]{imakeidx}   % Index
+
+
+
+%-----------------------------------------------------------------------------
+% Allgemeine Dokumenten-Informationen
+  \newcommand{\Author}{{Autor}}
+  \newcommand{\Title}{{Titel}}
+
+%-----------------------------------------------------------------------------
+% Hyperref  
+  \usepackage{hyperref}  % Erst fast zum Schluss einbinden
+  \hypersetup{
+    unicode,
     colorlinks=false,
     pdfborder={0 0 0},
+    pdfdisplaydoctitle,  % Titel in Titelleiste
+    linktoc=all,         % TOC: Seitenzahlen verlinken
     pdfauthor={\Author},
-    pdftitle={\Title},
-    unicode,
-    pdfdisplaydoctitle,
-    linktoc=all,
-    breaklinks=true
-  ]{hyperref}                        % Hyperlinks, PDF-Infos
-  \usepackage[
-    paper=a4paper,
-    left=2.54cm,
-    right=2.54cm,
-    top=2.54cm,
-    bottom=2.54cm
-  ]{geometry}                        % Seitenformat mit Seitenrändern
-  %\usepackage{graphicx}              % Grafiken einbinden
-  %\usepackage{subfig}                % Unter-Figures
-  %\usepackage{tikz}                  % Grafiken zeichnen
+    pdftitle={\Title}
+    %pdfsubject={Betreff},
+    %pdfcreator={Creator},
+    %pdfproducer={Produzent},
+    %pdfkeywords={key1} {key2} {key3}
+  }
+  \usepackage{cleveref} % Bessere Verweise
+
 %-----------------------------------------------------------------------------
 % Layoutoptionen
 % OTF/TTF-Fonts verwenden
@@ -47,13 +77,8 @@
 %\setsansfont[Mapping=tex-text]{Myriad Pro Light}
 %\setmonofont[Mapping=tex-text]{Courier New}
 
-% Überschriften mit Serifen, so wie immer
-\setkomafont{disposition}{\normalcolor\bfseries}
-
-% Alleinstehende Zeilen unterbinden
-\clubpenalty = 10000
-\widowpenalty = 10000 
-\displaywidowpenalty = 10000
+% Überschriften mit Serifen, so wie ohne KOMA
+%\setkomafont{disposition}{\normalcolor\bfseries}
 
 %-----------------------------------------------------------------------------
 % Dokumentenanfang
