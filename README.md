@@ -1,2 +1,2 @@
 # tex-template
-Personal TeX Templates
+Eigene TeX-Vorlagen.
