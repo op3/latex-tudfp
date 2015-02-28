@@ -1,0 +1,145 @@
+% Warnmeldungen bei veralteten Befehlen/Paketen
+\RequirePackage[l2tabu, orthodox]{nag}
+
+% Dokumentenklasse mit Optionen
+\documentclass[
+    colorback,                   % Druckertinte verschwenden
+    oneside,
+    accentcolor=tud2b,           % Farbe
+    10pt,                        % 9.5pt (default) wären etwas klein
+    article                      % Passt besser auf Bedürfnisse
+]{tudreport}
+
+%-----------------------------------------------------------------------------
+% Allgemeine Pakete
+  \usepackage[ngerman]{babel}
+  \usepackage{iftex}
+  \ifPDFTeX                     % pdfTeX-spezifische Pakete
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+  \else
+    \ifXeTeX                    % XeTeX-spezifische Pakete
+      \usepackage{xunicode}
+    \fi
+  \fi
+  \usepackage{microtype}        % Bessere Typographie
+
+%-----------------------------------------------------------------------------
+% Weitere (dokumentenspezifische) Pakete
+  \usepackage{mathtools}        % Mathematik
+% \usepackage{amssymb}          % + Symbole
+% \usepackage{amsthm}           % + Theoreme
+  \usepackage{siunitx}          % Zahlen mit Einheiten
+
+% \usepackage{graphicx}          % Grafiken einbinden
+% \usepackage{tikz}              % Zeichnungen erstellen
+
+\usepackage[backend=biber]{biblatex} % Bibliograhie
+%\addbibresource{literatur.bib}
+
+% \usepackage[xindy]{glossaries} % Glossar
+% \usepackage[xindy]{imakeidx}   % Index
+  
+  \usepackage{tabularx}
+%  \usepackage{longtable}
+%  \usepackage{multirow}
+%  \usepackage{booktabs}
+
+%-----------------------------------------------------------------------------
+% Allgemeine Dokumenten-Informationen
+  \newcommand{\Title}{{9.3: Bestimmung der Belastbarkeit von Physikstudenten mittels Monte-Carlo}}
+  \newcommand{\Abteilung}{{für schwachsinnige Physik}} % A, B oder C
+  
+  \newcommand{\Betreuer}{{Richard Feynman}}
+  \newcommand{\ConductDate}{{2. Februar 2016}} % Durchgeführt am
+  \newcommand{\ReleaseDate}{{3. Februar 2016}} % Abgabe
+  
+  \newcommand{\AutorA}{{Marie Curie}}
+  \newcommand{\AutorAMatr}{{2828427}}
+  \newcommand{\AutorAMail}{marie.curie@stud.tu-darmstadt.de}
+  
+  \newcommand{\AutorB}{{Erwin Schrödinger}}
+  \newcommand{\AutorBMatr}{{2718281}}
+  \newcommand{\AutorBMail}{erwin.schrödinger@stud.tu-darmstadt.de}
+  
+  % Infos korrekt setzen (Hier muss nichts geändert werden)
+  \newcommand{\Author}{{\AutorA, \AutorB}}
+  \newcommand{\Subtitle}{{
+  \begin{tabular}{|l|l|}
+    \AutorA & \AutorB \\
+    \textaccent{Matrikel-Nr.: \AutorAMatr} & \textaccent{Matrikel-Nr.: \AutorBMatr} \\
+    \textaccent{\href{mailto:\AutorAMail}{\AutorAMail}} & \textaccent{\href{mailto:\AutorBMail}{\AutorBMail}} \\
+  \end{tabular}\\
+  }}
+  \newcommand{\Subsubtitle}{{Betreuer: \Betreuer\\
+                 Versuch durchgeführt am: \ConductDate\\
+                             Abgabedatum: \ReleaseDate}}
+  \newcommand{\Institution}{{Physikalisches Praktikum\\für Fortgeschrittene\\Abteilung \Abteilung}}
+  \newcommand{\Eigenstandigkeit}{{Hiermit versichern wir, das vorliegende Protokoll für das Physikalische Praktikum für Fortgeschrittene ohne Hilfe Dritter nur mit den angegebenen Quellen und Hilfsmitteln angefertigt zu haben. Alle Stellen, die aus Quellen entnommen wurden, sind als solche kenntlich gemacht. Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
+  
+  \vspace{5ex}
+  \begin{tabularx}{\linewidth}{Xll}
+ Darmstadt, den \ReleaseDate, & \makebox[12em]{\hrulefill}, & \makebox[12em]{\hrulefill}.\\
+    & \parbox[t]{12em}{\AutorA} & \parbox[t]{12em}{\AutorB}\\
+\end{tabularx}
+  }}
+
+%-----------------------------------------------------------------------------
+% Hyperref  
+\usepackage{hyperref}
+\hypersetup{%
+    unicode,
+    pdfdisplaydoctitle,  % Titel in Titelleiste
+    linktoc=all,         % TOC: Seitenzahlen verlinken
+    pdfauthor={\Author},
+    pdftitle={\Title}
+    %pdfsubject={Betreff},
+    %pdfcreator={Creator},
+    %pdfproducer={Produzent},
+    %pdfkeywords={key1} {key2} {key3}
+}
+
+%-----------------------------------------------------------------------------
+% Dokumentenanfang
+\begin{document}
+
+%-----------------------------------------------------------------------------
+% Titelinformationen (erst nach \begin{document}, für gute Silbentrennung)
+\title{\Title}
+\subtitle{\Subtitle}
+\subsubtitle{\Subsubtitle}
+\institution{\Institution}
+
+\sponsor{\Eigenstandigkeit}
+
+%-----------------------------------------------------------------------------
+% Dokumenteninhalt
+%-----------------------------------------------------------------------------
+
+% Titelseite
+\maketitle
+
+% Inhaltsverzeichnis
+\tableofcontents
+\cleardoublepage
+
+\section{Einführung}
+
+\section{Theoretische Grundlagen}
+
+\section{Versuchsaufbau}
+
+\section{Durchführung}
+
+\section{Auswertung}
+
+\section{Fazit}
+
+\nocite{*} % Quellen auch ohne zitieren auflisten
+\printbibliography[heading=bibnumbered]
+
+\section{Messdaten}
+
+
+
+\end{document}
