@@ -34,20 +34,21 @@
 % \usepackage{graphicx}          % Grafiken einbinden
 % \usepackage{tikz}              % Zeichnungen erstellen
 
-\usepackage[backend=biber]{biblatex} % Bibliograhie
-%\addbibresource{literatur.bib}
+  \usepackage[backend=biber]{biblatex} % Bibliograhie
+% \addbibresource{literatur.bib}
 
 % \usepackage[xindy]{glossaries} % Glossar
 % \usepackage[xindy]{imakeidx}   % Index
   
   \usepackage{tabularx}
-%  \usepackage{longtable}
-%  \usepackage{multirow}
-%  \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{multirow}
+% \usepackage{booktabs}
 
 %-----------------------------------------------------------------------------
-% Allgemeine Dokumenten-Informationen
-  \newcommand{\Title}{{9.3: Bestimmung der Belastbarkeit von Physikstudenten mittels Monte-Carlo}}
+% Allgemeine Dokumenteninformationen
+  \newcommand{\VersuchsNr}{{9.3}}
+  \newcommand{\Titel}{{Bestimmung der Belastbarkeit von Physikstudenten mittels Monte-Carlo}}
   \newcommand{\Abteilung}{{für schwachsinnige Physik}} % A, B oder C
   
   \newcommand{\Betreuer}{{Richard Feynman}}
@@ -64,6 +65,7 @@
   
   % Infos korrekt setzen (Hier muss nichts geändert werden)
   \newcommand{\Author}{{\AutorA, \AutorB}}
+  \newcommand{\FullTitle}{{\VersuchsNr: \Titel}}
   \newcommand{\Subtitle}{{
   \begin{tabular}{|l|l|}
     \AutorA & \AutorB \\
@@ -92,10 +94,8 @@
     pdfdisplaydoctitle,  % Titel in Titelleiste
     linktoc=all,         % TOC: Seitenzahlen verlinken
     pdfauthor={\Author},
-    pdftitle={\Title}
+    pdftitle={\FullTitle}
     %pdfsubject={Betreff},
-    %pdfcreator={Creator},
-    %pdfproducer={Produzent},
     %pdfkeywords={key1} {key2} {key3}
 }
 
@@ -105,7 +105,7 @@
 
 %-----------------------------------------------------------------------------
 % Titelinformationen (erst nach \begin{document}, für gute Silbentrennung)
-\title{\Title}
+\title{\FullTitle}
 \subtitle{\Subtitle}
 \subsubtitle{\Subsubtitle}
 \institution{\Institution}
