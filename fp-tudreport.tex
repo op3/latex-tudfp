@@ -3,7 +3,7 @@
 
 % Dokumentenklasse mit Optionen
 \documentclass[
-    colorback,                   % Druckertinte verschwenden
+    colorback,                   % Druckertinte für Titelseite verschwenden
     oneside,
     accentcolor=tud2b,           % Farbe
     10pt,                        % 9.5pt (default) wären etwas klein
@@ -31,14 +31,14 @@
 % \usepackage{amsthm}           % + Theoreme
   \usepackage{siunitx}          % Zahlen mit Einheiten
 
-% \usepackage{graphicx}          % Grafiken einbinden
-% \usepackage{tikz}              % Zeichnungen erstellen
+% \usepackage{graphicx}         % Grafiken einbinden
+% \usepackage{tikz}             % Zeichnungen erstellen
 
   \usepackage[backend=biber]{biblatex} % Bibliograhie
 % \addbibresource{literatur.bib}
 
-% \usepackage[xindy]{glossaries} % Glossar
-% \usepackage[xindy]{imakeidx}   % Index
+% \usepackage[xindy]{glossaries}% Glossar
+% \usepackage[xindy]{imakeidx}  % Index
   
   \usepackage{tabularx}
 % \usepackage{longtable}
@@ -52,7 +52,7 @@
   \newcommand{\Abteilung}{{für schwachsinnige Physik}} % A, B oder C
   
   \newcommand{\Betreuer}{{Richard Feynman}}
-  \newcommand{\ConductDate}{{2. Februar 2016}} % Durchgeführt am
+  \newcommand{\LabDate}{{2. Februar 2016}} % Durchgeführt am
   \newcommand{\ReleaseDate}{{3. Februar 2016}} % Abgabe
   
   \newcommand{\AutorA}{{Marie Curie}}
@@ -74,8 +74,8 @@
   \end{tabular}\\
   }}
   \newcommand{\Subsubtitle}{{Betreuer: \Betreuer\\
-                 Versuch durchgeführt am: \ConductDate\\
-                             Abgabedatum: \ReleaseDate}}
+               Versuch durchgeführt am: \LabDate\\
+                           Abgabedatum: \ReleaseDate}}
   \newcommand{\Institution}{{Physikalisches Praktikum\\für Fortgeschrittene\\Abteilung \Abteilung}}
   \newcommand{\Eigenstandigkeit}{{Hiermit versichern wir, das vorliegende Protokoll für das Physikalische Praktikum für Fortgeschrittene ohne Hilfe Dritter nur mit den angegebenen Quellen und Hilfsmitteln angefertigt zu haben. Alle Stellen, die aus Quellen entnommen wurden, sind als solche kenntlich gemacht. Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
   
@@ -104,17 +104,13 @@
 \begin{document}
 
 %-----------------------------------------------------------------------------
-% Titelinformationen (erst nach \begin{document}, für gute Silbentrennung)
+% Titelinformationen
 \title{\FullTitle}
 \subtitle{\Subtitle}
 \subsubtitle{\Subsubtitle}
 \institution{\Institution}
 
 \sponsor{\Eigenstandigkeit}
-
-%-----------------------------------------------------------------------------
-% Dokumenteninhalt
-%-----------------------------------------------------------------------------
 
 % Titelseite
 \maketitle
@@ -123,23 +119,45 @@
 \tableofcontents
 \cleardoublepage
 
+%-----------------------------------------------------------------------------
+% Dokumenteninhalt
+%-----------------------------------------------------------------------------
+
+% Gesplittet für bessere Übersicht, Struktur, Zusammenarbeit, ggf. VCS.
+
+
 \section{Einführung}
+%\input{intro.tex}
+
 
 \section{Theoretische Grundlagen}
+%\input{grundlagen.tex}
+
 
 \section{Versuchsaufbau}
+%\input{aufbau.tex}
+
 
 \section{Durchführung}
+%\input{execution.tex}
+
 
 \section{Auswertung}
+%\input{auswertung.tex}
+
 
 \section{Fazit}
+%\input{fazit.tex}
 
-\nocite{*} % Quellen auch ohne zitieren auflisten
+
+% Literaturverzeichnis
+\nocite{*} % Alle Quellen (auch ohne Zitieren) auflisten
 \printbibliography[heading=bibnumbered]
 
+
 \section{Messdaten}
+%\input{daten.tex}
 
 
-
+%-----------------------------------------------------------------------------
 \end{document}

@@ -18,9 +18,9 @@ Anschließend werden allgemeine Dokumenteninformationen definiert:
 
 `\Betreuer`: Der Name des Betreuers, mit dem der Versuch durchgeführt wurde.
 
-`\ConductDate`: Das Datum der Versuchsdurchführung.
+`\LabDate`: Das Datum der Versuchsdurchführung.
 
-`\ReleaseDate`:Das Abgabedatum.
+`\ReleaseDate`: Das Abgabedatum.
 
 `\AutorA`, `\AutorB`: Die Namen der beiden Versuchsteilnehmer.
 
