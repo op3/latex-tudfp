@@ -18,9 +18,9 @@ Anschließend werden allgemeine Dokumenteninformationen definiert:
 
 `\Betreuer`: Der Name des Betreuers, mit dem der Versuch durchgeführt wurde.
 
-`\LabDate`: Das Datum der Versuchsdurchführung.
+`labdate`: Das Datum der Versuchsdurchführung im Format YYYY-MM-DD.
 
-`\ReleaseDate`: Das Abgabedatum.
+`releasedate`: Das Abgabedatum im Format YYYY-MM-DD.
 
 `\AutorA`, `\AutorB`: Die Namen der beiden Versuchsteilnehmer.
 
@@ -29,3 +29,5 @@ Anschließend werden allgemeine Dokumenteninformationen definiert:
 `\AutorAMail`, `\AutorBMail`: Die E-Mail-Adressen der beiden Versuchsteilnehmer.
 
 Es sind keine weiteren Modifikationen im Präambel notwendig.
+
+Falls gewünscht, kann die Sprache unter *Allgemeine Pakete* auf `english` geändert werden. Alle passenden Texte, sowie die Datumsangaben, werden dann automatisch auf englisch dargestellt. Die *letzte* aufgeführte Sprache beim Einbinden von babel wird automatisch aktiviert, im Normalfall also deutsch.

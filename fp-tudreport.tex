@@ -12,8 +12,10 @@
 
 %-----------------------------------------------------------------------------
 % Allgemeine Pakete
-  \usepackage[ngerman]{babel}
+  \usepackage[english,ngerman]{babel}
   \usepackage{iftex}
+  \usepackage{iflang}
+  \usepackage[useregional]{datetime2}
   \ifPDFTeX                     % pdfTeX-spezifische Pakete
     \usepackage[utf8]{inputenc}
     \usepackage[T1]{fontenc}
@@ -34,7 +36,7 @@
 % \usepackage{graphicx}         % Grafiken einbinden
 % \usepackage{tikz}             % Zeichnungen erstellen
 
-  \usepackage[backend=biber]{biblatex} % Bibliograhie
+  \usepackage[backend=biber,style=alphabetic]{biblatex} % Bibliograhie
 % \addbibresource{literatur.bib}
 
 % \usepackage[xindy]{glossaries}% Glossar
@@ -49,11 +51,11 @@
 % Allgemeine Dokumenteninformationen
   \newcommand{\VersuchsNr}{{9.3}}
   \newcommand{\Titel}{{Bestimmung der Belastbarkeit von Physikstudenten mittels Monte-Carlo}}
-  \newcommand{\Abteilung}{{für schwachsinnige Physik}} % A, B oder C
+  \newcommand{\Abteilung}{{X}} % A, B oder C
   
   \newcommand{\Betreuer}{{Richard Feynman}}
-  \newcommand{\LabDate}{{2. Februar 2016}} % Durchgeführt am
-  \newcommand{\ReleaseDate}{{3. Februar 2016}} % Abgabe
+  \DTMsavedate{labdate}{2016-02-16} % Durchgeführt am
+  \DTMsavedate{releasedate}{2016-02-17} % Abgabe
   
   \newcommand{\AutorA}{{Marie Curie}}
   \newcommand{\AutorAMatr}{{2828427}}
@@ -69,19 +71,19 @@
   \newcommand{\Subtitle}{{
   \begin{tabular}{|l|l|}
     \AutorA & \AutorB \\
-    \textaccent{Matrikel-Nr.: \AutorAMatr} & \textaccent{Matrikel-Nr.: \AutorBMatr} \\
+    \textaccent{\IfLanguageName{ngerman}{Matrikel-Nr.}{Matriculation no.}: \AutorAMatr} & \textaccent{Matrikel-Nr.: \AutorBMatr} \\
     \textaccent{\href{mailto:\AutorAMail}{\AutorAMail}} & \textaccent{\href{mailto:\AutorBMail}{\AutorBMail}} \\
   \end{tabular}\\
   }}
-  \newcommand{\Subsubtitle}{{Betreuer: \Betreuer\\
-               Versuch durchgeführt am: \LabDate\\
-                           Abgabedatum: \ReleaseDate}}
-  \newcommand{\Institution}{{Physikalisches Praktikum\\für Fortgeschrittene\\Abteilung \Abteilung}}
-  \newcommand{\Eigenstandigkeit}{{Hiermit versichern wir, das vorliegende Protokoll für das Physikalische Praktikum für Fortgeschrittene ohne Hilfe Dritter nur mit den angegebenen Quellen und Hilfsmitteln angefertigt zu haben. Alle Stellen, die aus Quellen entnommen wurden, sind als solche kenntlich gemacht. Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
+  \newcommand{\Subsubtitle}{{\IfLanguageName{ngerman}{Betreuer}{Tutor}: \Betreuer\\
+    \IfLanguageName{ngerman}{Versuch durchgeführt am}{Experiment conducted on}: \DTMusedate{labdate}\\
+    \IfLanguageName{ngerman}{Abgabedatum}{Submission date}: \DTMusedate{releasedate} }}
+  \newcommand{\Institution}{{Physikalisches Praktikum\\für Fortgeschrittene\\Abteilung \Abteilung}} % Nicht übersetzen
+  \newcommand{\StatutoryDec}{{\IfLanguageName{ngerman}{Hiermit versichern wir, das vorliegende Protokoll für das Physikalische Praktikum für Fortgeschrittene ohne Hilfe Dritter nur mit den angegebenen Quellen und Hilfsmitteln angefertigt zu haben. Alle Stellen, die aus Quellen entnommen wurden, sind als solche kenntlich gemacht. Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.}{We hereby confirm that the work presented in this protocol for the \foreignlanguage{ngerman}{Physikalisches Praktikum für Fortgeschrittene} has been conducted without any help of third parties, solely based on the stated sources and tools. All material which has been quoted from the used sources has been explicitly marked. Neither this, nor a similar work, has been presented to an examination committee.}
   
   \vspace{5ex}
   \begin{tabularx}{\linewidth}{Xll}
- Darmstadt, den \ReleaseDate, & \makebox[12em]{\hrulefill}, & \makebox[12em]{\hrulefill}.\\
+ Darmstadt, \IfLanguageName{ngerman}{den }{}\DTMusedate{releasedate}, & \makebox[12em]{\hrulefill}, & \makebox[12em]{\hrulefill}.\\
     & \parbox[t]{12em}{\AutorA} & \parbox[t]{12em}{\AutorB}\\
 \end{tabularx}
   }}
@@ -110,7 +112,7 @@
 \subsubtitle{\Subsubtitle}
 \institution{\Institution}
 
-\sponsor{\Eigenstandigkeit}
+\sponsor{\StatutoryDec}
 
 % Titelseite
 \maketitle
