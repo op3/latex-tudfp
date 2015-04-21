@@ -5,7 +5,7 @@
 \documentclass[
     colorback,                   % Druckertinte für Titelseite verschwenden
     oneside,
-    accentcolor=tud2b,           % Farbe
+    accentcolor=tud2b,           % Farbe (Abteilung A: 2b, B: 9c, C: 8b)
     10pt,                        % 9.5pt (default) wären etwas klein
     article                      % Passt besser auf Bedürfnisse
 ]{tudreport}
@@ -32,6 +32,16 @@
 % \usepackage{amssymb}          % + Symbole
 % \usepackage{amsthm}           % + Theoreme
   \usepackage{siunitx}          % Zahlen mit Einheiten
+  \IfLanguageName{ngerman}{
+    \sisetup{locale=DE,tophrase={{\,bis\,}}}}{
+    \sisetup{locale=EN,tophrase={{\,to\,}}}}
+  \sisetup{
+    seperr=true,
+    tightpm,
+    repeatunits=false,
+    trapambigrange=false,
+    fraction=nice
+  }
 
 % \usepackage{graphicx}         % Grafiken einbinden
 % \usepackage{tikz}             % Zeichnungen erstellen
