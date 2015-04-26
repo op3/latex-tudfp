@@ -13,17 +13,9 @@
 %-----------------------------------------------------------------------------
 % Allgemeine Pakete
   \usepackage[english,ngerman]{babel}
-  \usepackage{iftex}
   \usepackage{iflang}
   \usepackage[useregional]{datetime2}
-  \ifPDFTeX                     % pdfTeX-spezifische Pakete
-    \usepackage[utf8]{inputenc}
-    \usepackage[T1]{fontenc}
-  \else
-    \ifXeTeX                    % XeTeX-spezifische Pakete
-      \usepackage{xunicode}
-    \fi
-  \fi
+  \usepackage[utf8]{luainputenc}% Automatisch xetex-/lua/inputenc.
   \usepackage{microtype}        % Bessere Typographie
 
 %-----------------------------------------------------------------------------
@@ -48,9 +40,6 @@
 
   \usepackage[backend=biber,style=alphabetic]{biblatex} % Bibliograhie
 % \addbibresource{literatur.bib}
-
-% \usepackage[xindy]{glossaries}% Glossar
-% \usepackage[xindy]{imakeidx}  % Index
   
   \usepackage{tabularx}
 % \usepackage{longtable}
