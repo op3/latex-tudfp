@@ -7,12 +7,13 @@
     oneside,
     accentcolor=tud2b,           % Farbe (Abteilung A: 2b, B: 9c, C: 8b)
     10pt,                        % 9.5pt (default) wären etwas klein
-    article                      % Passt besser auf Bedürfnisse
+    article,                     % Passt besser auf Bedürfnisse
+    ngerman,english              % Letzte Sprache ist aktive Sprache
 ]{tudreport}
 
 %-----------------------------------------------------------------------------
 % Allgemeine Pakete
-  \usepackage[english,ngerman]{babel}
+  \usepackage{babel}
   \usepackage{iflang}
   \usepackage[useregional]{datetime2}
   \usepackage[utf8]{luainputenc}% Automatisch xetex-/lua/inputenc.
@@ -24,22 +25,14 @@
 % \usepackage{amssymb}          % + Symbole
 % \usepackage{amsthm}           % + Theoreme
   \usepackage{siunitx}          % Zahlen mit Einheiten
-  \IfLanguageName{ngerman}{
-    \sisetup{locale=DE,tophrase={{\,bis\,}}}}{
-    \sisetup{locale=EN,tophrase={{\,to\,}}}}
-  \sisetup{
-    seperr=true,
-    tightpm,
-    repeatunits=false,
-    trapambigrange=false,
-    fraction=nice
-  }
+  \addto\extrasngerman{\sisetup{locale = DE}}
+  \addto\extrasenglish{\sisetup{locale = US}}
 
 % \usepackage{graphicx}         % Grafiken einbinden
 % \usepackage{tikz}             % Zeichnungen erstellen
 
   \usepackage[backend=biber,style=alphabetic]{biblatex} % Bibliograhie
-% \addbibresource{literatur.bib}
+% \addbibresource{bib/literatur.bib}
   
   \usepackage{tabularx}
 % \usepackage{longtable}
@@ -128,27 +121,27 @@
 
 
 \section{Einführung}
-%\input{intro.tex}
+%\input{tex/intro.tex}
 
 
 \section{Theoretische Grundlagen}
-%\input{grundlagen.tex}
+%\input{tex/grundlagen.tex}
 
 
 \section{Versuchsaufbau}
-%\input{aufbau.tex}
+%\input{tex/aufbau.tex}
 
 
 \section{Durchführung}
-%\input{execution.tex}
+%\input{tex/execution.tex}
 
 
 \section{Auswertung}
-%\input{auswertung.tex}
+%\input{tex/auswertung.tex}
 
 
 \section{Fazit}
-%\input{fazit.tex}
+%\input{tex/fazit.tex}
 
 
 % Literaturverzeichnis
@@ -157,7 +150,7 @@
 
 
 \section{Messdaten}
-%\input{daten.tex}
+%\input{tex/daten.tex}
 
 
 %-----------------------------------------------------------------------------

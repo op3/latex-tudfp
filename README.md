@@ -32,4 +32,4 @@ Es kann zudem bei der Definition der Dokumentenklasse eine Farbe festgelegt werd
 
 Es sind keine weiteren Modifikationen im Präambel notwendig.
 
-Falls gewünscht, kann die Sprache unter *Allgemeine Pakete* auf `english` geändert werden. Alle passenden Texte, sowie die Datumsangaben, werden dann automatisch auf englisch dargestellt. Die *letzte* aufgeführte Sprache beim Einbinden von babel wird automatisch aktiviert, im Normalfall also deutsch.
+Falls gewünscht, kann die Sprache in den Klassenoptionen auf `english` geändert werden. Alle passenden Texte, sowie die Datumsangaben, werden dann automatisch auf Englisch dargestellt. Die *letzte* aufgeführte Sprache in den Klassenoptionen wird automatisch aktiviert, im Normalfall also deutsch (`ngerman`).
