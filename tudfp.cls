@@ -63,7 +63,6 @@
 \LoadClass{tudreport}
 
 
-%-----------------------------------------------------------------------------
 % General packages
 \RequirePackage{babel}
 \RequirePackage{iflang}
@@ -72,7 +71,7 @@
 \RequirePackage[utf8]{luainputenc}% Automatically use xetex-/lua/inputenc.
 \RequirePackage{microtype}        % Better typography.
 
-%-----------------------------------------------------------------------------
+
 % always needed packages
 \RequirePackage{mathtools}        % set math
 % \RequirePackage{amssymb}        % + symbols (not working?)
@@ -145,8 +144,8 @@
   \RequirePackage{hyperref}
   \hypersetup{%
     unicode,
-    pdfdisplaydoctitle,  % Titel in Titelleiste
-    linktoc=all,         % TOC: Seitenzahlen verlinken
+    pdfdisplaydoctitle,  % Title in title bar
+    linktoc=all,         % TOC: link page numbers
     pdfauthor={\Author},
     pdftitle={\FullUTitle},
     pdfproducer={LaTeX TUD-CD (C. v. Loewenich \& J. Werner), LaTeX TUD-FP (O. Papst)}
@@ -163,5 +162,4 @@
   \sponsor{\StatutoryDec}
 }
 
-%-----------------------------------------------------------------------------
 \endinput
