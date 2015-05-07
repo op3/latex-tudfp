@@ -6,10 +6,10 @@
 % to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 % copies of the Software, and to permit persons to whom the Software is
 % furnished to do so, subject to the following conditions:
-
+%
 % The above copyright notice and this permission notice shall be included in
 % all copies or substantial portions of the Software.
-
+%
 % THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 % IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 % FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,78 +20,73 @@
 
 % tudfp is a tudreport-based class aimed at creating FP protocols, while
 % following the TUD-Design-Manual and the "Spielregeln des FP".
+% It is not an official class provided by the TU.
+% See https://github.com/op3/latex-tudfp
 
-\def\filedate{2015-05-05}
+\def\filedate{2015/05/07}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tudreport}
- [\filedate\space O. Papst's FP-documentclass based on
+\ProvidesClass{tudfp}[\filedate\space O. Papst's FP-documentclass based on
    Clemens von Loewenich's and Joe Werner's TUD-Design package]
 
-\ClassInfo{tudfp}{Die Klasse ist momentan noch in der Alpha-Phase, die Verwendung wird noch nicht empfohlen.}
+% Options for the class
+% Set color depending on the department
+\DeclareOption{abteilunga}{
+    \PassOptionsToClass{accentcolor=tud2b}{tudreport}
+    \gdef\@Abteilung{A}}
+\DeclareOption{abteilungb}{
+    \PassOptionsToClass{accentcolor=tud9c}{tudreport}
+    \gdef\@Abteilung{B}}
+\DeclareOption{abteilungc}{
+    \PassOptionsToClass{accentcolor=tud8b}{tudreport}
+    \gdef\@Abteilung{C}}
 
-% Dokumentenklasse mit Optionen
-\DeclareOption{abteilunga}{\@abtatrue}
-\DeclareOption{abteilungb}{\@abtbtrue}
-\DeclareOption{abteilungc}{\@abtctrue}
-\LoadClass[
-    colorback,                   % Druckertinte für Titelseite verschwenden
-    oneside,
-    10pt,                        % 9.5pt (default) wären etwas klein
-    article                      % Passt besser auf Bedürfnisse
-]{tudreport}
+\gdef\@Abteilung{\ClassWarning{tudfp}{Es wurde keine Abeiltung als Klassenoption angegeben.}}
 
-\if\@abtatrue\then
-    \DeclareOption*{\PassOptionsToClass{accentcolor=tud2b}{tudreport}}
-    \gdef\@Abteilung{A}
-\else\if\@abtbtrue\then
-    \DeclareOption*{\PassOptionsToClass{accentcolor=tud9c}{tudreport}}
-    \gdef\@Abteilung{B}
-\else\if\@abtctrue\then
-    \DeclareOption*{\PassOptionsToClass{accentcolor=tud8b}{tudreport}}
-    \gdef\@Abteilung{C}
-\else
-    \ClassWarning{tudfp}{Es wurde keine Abeiltung als Klassenoption angegeben.}
-    \gdef\@Abteilung{}
+
+\newif\ifcolorback
+
+% Make it possible to disable the colorback
+\colorbacktrue
+\DeclareOption{nocolorback}{\colorbackfalse}
+\ProcessOptions\relax
+
+\ifcolorback \PassOptionsToClass{colorback}{tudreport}
 \fi
 
-
-
-%    accentcolor=tud2b,           % Farbe (Abteilung A: 2b, B: 9c, C: 8b)
+% recessively set default options
+\PassOptionsToClass{10pt}{tudreport} % 9.5pt (default) is a little too small
+\PassOptionsToClass{article}{tudreport}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{tudreport}}
 \ProcessOptions\relax
 
-
+\LoadClass{tudreport}
 
 
 %-----------------------------------------------------------------------------
-% Allgemeine Pakete
-  \RequirePackage{babel}
-  \RequirePackage{iflang}
-  \RequirePackage{etoolbox}
-  \RequirePackage[useregional]{datetime2} % Datum in richtiger Sprache
-  \RequirePackage[utf8]{luainputenc}% Automatisch xetex-/lua/inputenc.
-  \RequirePackage{microtype}        % Bessere Typographie
+% General packages
+\RequirePackage{babel}
+\RequirePackage{iflang}
+\RequirePackage{etoolbox}
+\RequirePackage[useregional]{datetime2} % Dates in right language.
+\RequirePackage[utf8]{luainputenc}% Automatically use xetex-/lua/inputenc.
+\RequirePackage{microtype}        % Better typography.
 
 %-----------------------------------------------------------------------------
-% Weitere immer benötigte Pakete
-  \RequirePackage{mathtools}        % Mathematik
-  \RequirePackage{amssymb}          % + Symbole
-  \RequirePackage{siunitx}          % Zahlen mit Einheiten
-  \addto\extrasngerman{\sisetup{locale = DE}}
-  \addto\extrasenglish{\sisetup{locale = US}}
-  
-  \PassOptionsToPackage[backend=biber,style=alphabetic]{biblatex} % Bibliograhie
-  
-  \RequirePackage{tabularx}
+% always needed packages
+\RequirePackage{mathtools}        % set math
+% \RequirePackage{amssymb}        % + symbols (not working?)
+\RequirePackage{siunitx}          % numbers with units
+\RequirePackage{tabularx} 
+\addto\extrasngerman{\sisetup{locale = DE}}
+\addto\extrasenglish{\sisetup{locale = US}}
+
+\PassOptionsToPackage{backend=biber,style=alphabetic}{biblatex} % bibliograhy
 
 
 
-\DeclareStringOption{abteilung}
-
-%
 % Prepare title page
-% define subtitle and subsubtitle
+% Define commands used to set variables
 \def\VersuchsNr#1{\gdef\@VersuchsNr{#1}}
 \gdef\@VersuchsNr{\ClassWarning{tudfp}{No \noexpand\VersuchsNr given}}
 \def\Titel#1{\gdef\@Titel{#1}}
@@ -99,33 +94,31 @@
 \def\UTitel#1{\gdef\@UTitel{#1}}
 \gdef\@UTitel{\@Titel}
 
-
 \def\Betreuer#1{\gdef\@Betreuer{#1}}
 \gdef\@Betreuer{\ClassWarning{tudfp}{No \noexpand\Betreuer given}}
-% TOOD labdate releasedate
 
-  \DTMsavedate{labdate}{2016-02-16} % Durchgeführt am
-  \DTMsavedate{releasedate}{2016-02-17} % Abgabe
-
+\def\LabDate#1{\DTMsavedate{labdate}{#1}}
+\def\ReleaseDate#1{\DTMsavedate{releasedate}{#1}}
 
 \def\AutorA#1{\gdef\@AutorA{#1}}
-\gdef\@AutorA{}
+\gdef\@AutorA{\ClassWarning{tudfp}{No \noexpand\AutorA given}}
 \def\AutorAMatr#1{\gdef\@AutorAMatr{#1}}
-\gdef\@AutorAMatr{}
+\gdef\@AutorAMatr{\ClassWarning{tudfp}{No \noexpand\AutorAMatr given}}
 \def\AutorAMail#1{\gdef\@AutorAMail{#1}}
-\gdef\@AutorAMail{}
+\gdef\@AutorAMail{\ClassWarning{tudfp}{No \noexpand\AutorAMail given}}
 
 \def\AutorB#1{\gdef\@AutorB{#1}}
-\gdef\@AutorB{}
+\gdef\@AutorB{\ClassWarning{tudfp}{No \noexpand\AutorB given}}
 \def\AutorBMatr#1{\gdef\@AutorBMatr{#1}}
-\gdef\@AutorBMatr{}
+\gdef\@AutorBMatr{\ClassWarning{tudfp}{No \noexpand\AutorBMatr given}}
 \def\AutorBMail#1{\gdef\@AutorBMail{#1}}
-\gdef\@AutorBMail{}
+\gdef\@AutorBMail{\ClassWarning{tudfp}{No \noexpand\AutorBMail given}}
 
   
-% Infos korrekt setzen
+% Create title page and set information
   \newcommand{\Author}{{\@AutorA, \@AutorB}}
   \newcommand{\FullTitle}{{\@VersuchsNr: \@Titel}}
+  \newcommand{\FullUTitle}{{\@VersuchsNr: \@UTitel}}
   \newcommand{\Subtitle}{{
   \begin{tabular}{|l|l|}
     \@AutorA & \@AutorB \\
@@ -136,7 +129,7 @@
   \newcommand{\Subsubtitle}{{\IfLanguageName{ngerman}{Betreuer}{Tutor}: \@Betreuer\\
     \IfLanguageName{ngerman}{Versuch durchgeführt am}{Experiment conducted on}: \DTMusedate{labdate}\\
     \IfLanguageName{ngerman}{Abgabedatum}{Submission date}: \DTMusedate{releasedate} }}
-  \newcommand{\Institution}{{Physikalisches Praktikum\\für Fortgeschrittene\\\\Abteilung \@Abteilung}} % Nicht übersetzen
+  \newcommand{\Institution}{{\textbf{Physikalisches Praktikum}\\für Fortgeschrittene\\\\Abteilung \@Abteilung}} % Do not translate
   \newcommand{\StatutoryDec}{{\IfLanguageName{ngerman}{Hiermit versichern wir, das vorliegende Protokoll für das Physikalische Praktikum für Fortgeschrittene ohne Hilfe Dritter nur mit den angegebenen Quellen und Hilfsmitteln angefertigt zu haben. Alle Stellen, die aus Quellen entnommen wurden, sind als solche kenntlich gemacht. Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.}{We hereby confirm that the work presented in this protocol for the \foreignlanguage{ngerman}{Physikalisches Praktikum für Fortgeschrittene} has been conducted without any help of third parties, solely based on the stated sources and tools. All material which has been quoted from the used sources has been explicitly marked. Neither this, nor a similar work, has been presented to an examination committee.}
   
   \vspace{5ex}
@@ -147,9 +140,7 @@
   }}
 
 
-% AtBeginDocument AfterEndPreamble ...
-%-----------------------------------------------------------------------------
-% Hyperref  
+% Use Hyperref for PDF information
 \AtEndPreamble{
   \RequirePackage{hyperref}
   \hypersetup{%
@@ -157,26 +148,20 @@
     pdfdisplaydoctitle,  % Titel in Titelleiste
     linktoc=all,         % TOC: Seitenzahlen verlinken
     pdfauthor={\Author},
-    pdftitle={\FullTitle},
+    pdftitle={\FullUTitle},
     pdfproducer={LaTeX TUD-CD (C. v. Loewenich \& J. Werner), LaTeX TUD-FP (O. Papst)}
   }
   \RequirePackage{cleveref}
 }
 
-
 \AfterEndPreamble{
-  % Titelinformationen
+  % Set title information, so the \maketitle can be set properly
   \title{\FullTitle}
   \subtitle{\Subtitle}
   \subsubtitle{\Subsubtitle}
   \institution{\Institution}
   \sponsor{\StatutoryDec}
 }
-
-
-
-
-
 
 %-----------------------------------------------------------------------------
 \endinput

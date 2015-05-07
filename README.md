@@ -1,26 +1,38 @@
 # latex-tudfp
 
-Diese Vorlage eignet sich zur Erstellung von Protokollen für das Physikalische Praktikum für Fortgeschrittene. Sie kann frei verwendet werden. Die [Vorgaben](http://www.physik.tu-darmstadt.de/media/fachbereich_physik/phys_studium/phys_studium_bachelor/phys_studium_bsc_praktika/fpspielregeln.pdf) der TU werden dabei umgesetzt. Es wird das [Corporate Design der TU Darmstadt](http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/) verwendet, das zunächst installiert werden muss.
+Diese inoffizielle, nicht genehmigte LaTeX-Klasse, eignet sich zur Erstellung von Protokollen für das Physikalische Praktikum für Fortgeschrittene. Sie kann frei verwendet werden. Die [Vorgaben](http://www.physik.tu-darmstadt.de/media/fachbereich_physik/phys_studium/phys_studium_bachelor/phys_studium_bsc_praktika/fpspielregeln.pdf) der TU werden dabei umgesetzt. Es wird das [Corporate Design der TU Darmstadt](http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/) verwendet, das zunächst installiert werden muss.
 
 ## Kompatibilität
 
-Die Vorlage ist kompatibel mit pdfTeX und LuaTeX. Es wird die aktuelle Version von TeX Live/MacTeX, bzw. MikTeX (nach 21. April 2015) benötigt. Eventuell muss ein Update vorgenommen werden. Sofern `xetex-inputenc` vorhanden ist, kann auch XeTeX verwendet werden, anders ist die Unterstützung leider momentan nicht möglich, soweit ich weiß. Als Standard-Backend für das Literaturverzeichnis wird Biber verwendet.
+Die Klasse ist kompatibel mit pdfTeX und LuaTeX. Es wird die aktuelle Version von TeX Live/MacTeX, bzw. MikTeX (nach 21. April 2015) benötigt. Eventuell muss ein Update vorgenommen werden. Sofern `xetex-inputenc` vorhanden ist, kann auch XeTeX verwendet werden, anders ist die Unterstützung leider momentan nicht möglich, soweit ich weiß.
 
-## Anpassungsmöglichkeiten
+## Verwendung
+Die Klasse basiert auf `tudreport`. Alle Optionen, die für diese Klasse, verwendet werden können, können auch für die Klasse `tudfp` verwendet werden.
 
-Im Präambel werden zunächst die benötigten Pakete eingebunden, wobei einige evtl. nützliche Pakete bereits eingebunden wurden, oder nur noch einkommentiert werden müssen. Zum Einbinden eines Literaturverzeichnisses kann `\addbibresource` verwendet werden.
+```
+\documentclass[
+    abteilunga,
+    english,ngerman
+]{tudfp}
+```
 
-Anschließend werden allgemeine Dokumenteninformationen definiert:
+`english` und `ngerman` *müssen* dabei verwendet werden, wobei die letzte angegebene Sprache aktiv ist. Mit `abteilunga` *(IAP)*, `abteilungb` *(FKP)* oder `abteilungc` *(IKP)* wird die Abteilung, in der der Versuch durchgeführt wird, spezifiziert. Die Farbe wird automatisch an die jeweilige Institutsfarbe angepasst, kann aber weiterhin mit `accentcolor=…` modifiziert werden. Die Option `nocolorback` deaktiviert das Verschwenden von Druckerfarbe für die Titelseite.
 
-`\VersuchsNr`, `\Titel`: Die Nummer und der Name des Versuchs.
+## Titelseite mit Informationen zum Protokollen
 
-`\Abteilung`: Die Abteilung, in der der Versuch durchgeführt wird, z. B. `A` *(IAP)*, `B` *(FKP)* oder `C` *(IKP)*.
+Die Titelseite enthält diverse Informationen zum Versuch, wie den Titel, die Namen der Versuchsteilnehmer, eine Eigenständigkeitserklärung, etc. Die Eigenschaften werden mit folgenden Befehlen festgelegt:
+
+
+`\VersuchsNr`, `\Titel`: Die Nummer und der Name des Versuchs. Für den Fall, dass man TeX-Code im Titel verwenden möchte, kann optional mit `\UTitel` einen alternativen Titel angeben, der als PDF-Titel verwendet wird, z. B.:
+
+```
+\Titel{{\(\gamma\)-Strahlung}}
+\UTitel{{γ-Strahlung}}
+```
 
 `\Betreuer`: Der Name des Betreuers, mit dem der Versuch durchgeführt wurde.
 
-`labdate`: Das Datum der Versuchsdurchführung im Format YYYY-MM-DD.
-
-`releasedate`: Das Abgabedatum im Format YYYY-MM-DD.
+`\LabDate`, `\ReleaseDate`: Das Datum der Versuchsdurchführung und -abgabe im Format YYYY-MM-DD.
 
 `\AutorA`, `\AutorB`: Die Namen der beiden Versuchsteilnehmer.
 
@@ -28,11 +40,8 @@ Anschließend werden allgemeine Dokumenteninformationen definiert:
 
 `\AutorAMail`, `\AutorBMail`: Die E-Mail-Adressen der beiden Versuchsteilnehmer.
 
-Es kann zudem bei der Definition der Dokumentenklasse eine Farbe festgelegt werden. Bei den Institutsfarben handelt es sich anscheinend um `tud2b` für Abteilung A/IAP, `tud9c` für Abteilung B/FKP und `tud8b` für Abteilung C/IKP.
-
-Es sind keine weiteren Modifikationen im Präambel notwendig.
-
-Falls gewünscht, kann die Sprache in den Klassenoptionen auf `english` geändert werden. Alle passenden Texte, sowie die Datumsangaben, werden dann automatisch auf Englisch dargestellt. Die *letzte* aufgeführte Sprache in den Klassenoptionen wird automatisch aktiviert, im Normalfall also deutsch (`ngerman`).
+## Automatisch geladene Pakete
+Folgende Pakete werden automatisch geladen, da man sie wahrscheinlich sowieso immer benötigt, ansonsten sollten sie nicht stören: `mathtools`, `siunitx`, `tabularx`, `cleveref`. Automatisch werden für die Dokumentenerstellung zudem u. a. `hyperref`, `babel` und `datetime2` eingebunden. Das `biblatex`-Backend wird auf biber gesetzt, falls `biblatex` verwendet wird.
 
 ## Andere Vorlagen
 Weitere Vorlagen von mir finden sich unter [op3/tex-templates](https://github.com/op3/tex-templates).
