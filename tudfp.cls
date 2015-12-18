@@ -40,7 +40,7 @@
     \PassOptionsToClass{accentcolor=tud8b}{tudreport}
     \gdef\@Abteilung{C}}
 
-\gdef\@Abteilung{\ClassWarning{tudfp}{Es wurde keine Abeiltung als Klassenoption angegeben.}}
+\gdef\@Abteilung{\ClassWarning{tudfp}{Es wurde keine Abteilung als Klassenoption angegeben.}}
 
 
 \newif\ifcolorback
@@ -52,6 +52,24 @@
 
 \ifcolorback \PassOptionsToClass{colorback}{tudreport}
 \fi
+
+
+% Make it possible to hide matriculation number and email-address
+\newif\ifcensor
+\censorfalse
+\DeclareOption{censor}{\censortrue}
+\ProcessOptions\relax
+
+\newcommand{\censor}[1]{#1}
+\ifcensor
+\newlength{\censorwidth}
+\renewcommand{\censor}[1]
+{%
+    \settowidth{\censorwidth}{#1}%
+    \rule[-0.2em]{\censorwidth}{1.125em}%
+}
+\fi
+
 
 % recessively set default options
 \PassOptionsToClass{10pt}{tudreport} % 9.5pt (default) is a little too small
@@ -121,8 +139,8 @@
   \newcommand{\Subtitle}{{
   \begin{tabular}{|l|l|}
     \@AutorA & \@AutorB \\
-    \textaccent{\IfLanguageName{ngerman}{Matrikel-Nr.}{Matriculation no.}: \@AutorAMatr} & \textaccent{\IfLanguageName{ngerman}{Matrikel-Nr.}{Matriculation no.}: \@AutorBMatr} \\
-    \textaccent{\href{mailto:\@AutorAMail}{\@AutorAMail}} & \textaccent{\href{mailto:\@AutorBMail}{\@AutorBMail}} \\
+    \textaccent{\IfLanguageName{ngerman}{Matrikel-Nr.}{Matriculation no.}: \censor{\@AutorAMatr}} & \textaccent{\IfLanguageName{ngerman}{Matrikel-Nr.}{Matriculation no.}: \censor{\@AutorBMatr}} \\
+    \textaccent{\censor{\href{mailto:\@AutorAMail}{\@AutorAMail}}} & \textaccent{\censor{\href{mailto:\@AutorBMail}{\@AutorBMail}}} \\
   \end{tabular}\\
   }}
   \newcommand{\Subsubtitle}{{\IfLanguageName{ngerman}{Betreuer}{Tutor}: \@Betreuer\\
@@ -150,6 +168,7 @@
     pdftitle={\FullUTitle},
     pdfproducer={LaTeX TUD-CD (C. v. Loewenich \& J. Werner), LaTeX TUD-FP (O. Papst)}
   }
+  \urlstyle{same}
   \RequirePackage{cleveref}
 }
 
